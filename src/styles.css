@@ -1,0 +1,6 @@
+/* https://techtutorial.net/angular-tutorial/how-to-install-bootstrap-5-in-angular-16-application/ */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    background-color: #3B8EA5;
+}

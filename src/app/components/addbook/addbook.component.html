@@ -1,0 +1,59 @@
+<form class="d-flex flex-column align-items-center bg-dark pt-5 pb-5" (ngSubmit)="onAddBookEvent()">
+
+    <div *ngIf="isBookAdded" class="w-50 alert alert-success" role="alert">
+        <p class="text-bold">Book added successfully!</p>
+      </div>
+      
+    <!-- https://angular.io/guide/form-validation -->
+    <div *ngIf="inserted_title.invalid && (inserted_title.dirty || inserted_title.touched)" class="w-50 alert alert-danger" role="alert">
+        <div *ngIf="inserted_title.errors?.['required']">
+            <p class="text-bold">The title is required.</p>
+        </div>
+        <div *ngIf="inserted_title.errors?.['minlength']">
+            <p class="text-bold">The title must be at least 2 characters long.</p>
+        </div>
+    </div>
+
+    <div *ngIf="id_inserted.invalid && (id_inserted.dirty || id_inserted.touched)" class="w-50 alert alert-danger" role="alert">
+        <div *ngIf="id_inserted.errors?.['required']">
+            <p class="text-bold">The ID is required.</p>
+        </div>
+        <div *ngIf="id_inserted.errors?.['minlength']">
+            <p class="text-bold">The ID must be at least 1 characters long.</p>
+        </div>
+        <div *ngIf="id_inserted.errors?.['forbiddenName']">
+            The value must be different than 0.
+        </div>
+    </div>
+
+    <div *ngIf="inserted_author.invalid && (inserted_author.dirty || inserted_author.touched)" class="w-50 alert alert-danger" role="alert">
+        <div *ngIf="inserted_author.errors?.['required']">
+            <p class="text-bold">The author is required.</p>
+        </div>
+        <div *ngIf="inserted_author.errors?.['minlength']">
+            <p class="text-bold">The author must be at least 2 characters long.</p>
+        </div>
+    </div>
+
+    <div class="form-group w-50 mb-3">
+        <label for="id" class="text-white fw-bold mb-1">ID</label>
+        <input type="number" class="form-control" name="id" id="id" placeholder="Enter the identificator of the book"
+            minlength="1" maxlength="2" appForbiddenName=0 required ForbiddenName=0 [(ngModel)]="id" #id_inserted="ngModel"
+            (input)="onTyping()">
+    </div>
+
+  <div class="form-group w-50 mb-3">
+    <label for="title" class="text-white fw-bold mb-1">Title</label>
+    <input type="text" class="form-control" name="title" id="title" placeholder="Enter the name of the book"
+      minlength="2" maxlength="45" required [(ngModel)]="title"  #inserted_title="ngModel"
+      (input)="onTyping()">
+  </div>
+
+  <div class="form-group w-50 mb-3">
+    <label for="author" class="text-white fw-bold mb-1">Author</label>
+    <input type="text" class="form-control" name="author" id="author" placeholder="Add the author of the book"
+    minlength="2"  maxlength="45" required [(ngModel)]="author" #inserted_author="ngModel"
+    (input)="onTyping()">
+  </div>
+  <button type="submit" class="btn btn-info">Add</button>
+</form>

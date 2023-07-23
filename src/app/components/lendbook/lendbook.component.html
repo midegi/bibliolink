@@ -1,0 +1,12 @@
+<form class="d-flex justify-content-center" (submit)="onNameSubmit()">
+    <div class="d-flex align-items-end">
+        <div class="form-group w-100 me-2">
+            <label for="lent_to" class="text-white fw-bold mb-1">Name</label>
+            <input type="text" class="form-control" name="name" id="lent_to" placeholder="Enter the name of the user"
+              minlength="2" maxlength="45" required [(ngModel)]="lent_to"> 
+        </div>
+        <div class="form-group mt-5">
+            <button type="submit" class="btn btn-info">Lend</button>
+        </div>
+    </div>
+</form>

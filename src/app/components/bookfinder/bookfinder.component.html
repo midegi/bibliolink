@@ -1,0 +1,42 @@
+<div class="form-container bg-dark pt-5 pb-5">
+    <form class="d-flex justify-content-center">
+        <div class="form-group w-50">
+            <label for="bookinfo" class="text-white fw-bold mb-1">Book</label>
+            <input type="text" class="form-control" name="bookinfo" id="bookinfo" placeholder="Enter the info of the book"
+              minlength="2" maxlength="45" required [(ngModel)]="bookinfo" (input)="onSearch()">
+        </div>
+    </form>
+
+    <app-lendbook *ngIf="lend_process" (submitName)="lendBook($event)"></app-lendbook>
+</div>
+
+<table *ngIf="results.length > 0" class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Available</th>
+      <th scope="col">Lent to</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let book of results">
+        <tr>
+          <th scope="row">{{ book.id }}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.available ? 'yes' : 'no'}}</td>
+          <td>{{ book.lent_to }}</td>
+          <td>{{ book.date}}</td>
+          <td >
+            <fa-icon *ngIf="book.available" (click)="onLendRequest(book)" class="ms-3 me-3" [icon]="faBook"></fa-icon>
+            <fa-icon *ngIf="book.available" (click)="onDelete(book)" [icon]="faTimes"></fa-icon>
+            <fa-icon *ngIf="!book.available" (click)="onRestitution(book)" class="ms-3" [icon]="faArrowLeft"></fa-icon>
+        </td>
+        </tr>
+      </ng-container>
+    </tbody>
+</table>
